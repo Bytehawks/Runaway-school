@@ -7,7 +7,11 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
+import android.widget.Button;
 import android.widget.ImageView;
 
 public class MainActivity extends Activity {
@@ -25,12 +29,14 @@ public class MainActivity extends Activity {
     
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
-    	int level = 50;
+    	int level = 3;
     	ImageView imgview = (ImageView)findViewById(R.id.imageView1);
     	int[] levelInfo = levelCalculatorA(level);
     	boolean[] levelMap = levelGenerator(levelInfo);
     	Bitmap gamefield = drawMatrix(imgview.getWidth(), imgview.getHeight(), levelMap, levelInfo[0]);
     	imgview.setImageBitmap(gamefield);
+    	boolean[] sequenz = {true,false};
+    	moveDroid(sequenz, levelMap, levelInfo[0]);
     	super.onWindowFocusChanged(hasFocus);
     }
     
@@ -84,7 +90,45 @@ public class MainActivity extends Activity {
 			if(fields[i])
 				canvas.drawBitmap(bombfield, (i%line)*fieldWidth, j*fieldWidth, null);
     	}
+    	Bitmap android = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+    	android = getResizedBitmap(android, fieldWidth, fieldWidth);
+    	canvas.drawBitmap(android, 0, 0, null);
     	return bitmap;
+    }
+    
+    public void moveDroid(boolean[] sequenz, boolean[] fields, int line){
+    	ImageView imgView = (ImageView)findViewById(R.id.imageView1);
+    	BitmapDrawable drawable = (BitmapDrawable) imgView.getDrawable();
+    	Bitmap bitmap = drawable.getBitmap();
+    	Canvas canvas = new Canvas(bitmap);
+    	Paint paint = new Paint();
+    	int color = Color.GREEN;
+    	paint.setColor(color);
+    	int width = bitmap.getWidth()/line;
+    	int padding = width/2;
+    	int px = 0;
+    	int py = 0;
+    	int x = 0;
+    	int y = 0;
+    	int i = 0;
+    	while(x < line && y < line && fields[x+y*line] == NOBOMB){
+    		px = x;
+    		py = y;
+    		if(sequenz[i%sequenz.length] == RIGHT)
+    			x++;
+    		else
+    			y++;
+    		if(i%sequenz.length == 0){
+    			canvas.drawRect(px*width+padding-2, py*width+padding-2, px*width+padding+2, py*width+padding+2, paint);
+    		}
+   			canvas.drawLine(px*width+padding, py*width+padding, x*width+padding, y*width+padding, paint);
+    		i++;
+    	}
+    	if(fields[x+y] == BOMB){
+    		System.out.println("BUMMMMM!!!!!!!");
+    	}else{
+    		System.out.println("WIN");
+    	}
     }
 
     public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {
