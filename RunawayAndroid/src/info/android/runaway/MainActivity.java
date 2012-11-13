@@ -87,8 +87,8 @@ public class MainActivity extends Activity {
     	for(int j = 0, i = 0; i < line*line; i++){
     		if(i > 0 && i % line == 0)
     			j++;
-			if(fields[i])
-				canvas.drawBitmap(bombfield, (i%line)*fieldWidth, j*fieldWidth, null);
+    		if(fields[i])
+        		canvas.drawBitmap(bombfield, (i%line)*fieldWidth, j*fieldWidth, null);
     	}
     	Bitmap android = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
     	android = getResizedBitmap(android, fieldWidth, fieldWidth);
@@ -118,17 +118,15 @@ public class MainActivity extends Activity {
     			x++;
     		else
     			y++;
-    		if(i%sequenz.length == 0){
+    		if(i%sequenz.length == 0)
     			canvas.drawRect(px*width+padding-2, py*width+padding-2, px*width+padding+2, py*width+padding+2, paint);
-    		}
    			canvas.drawLine(px*width+padding, py*width+padding, x*width+padding, y*width+padding, paint);
     		i++;
     	}
-    	if(fields[x+y] == BOMB){
+    	if(fields[x+y] == BOMB)
     		System.out.println("BUMMMMM!!!!!!!");
-    	}else{
+    	else
     		System.out.println("WIN");
-    	}
     }
 
     public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {
