@@ -1,8 +1,10 @@
 package info.android.runaway;
 
+import info.android.runaway.controls.Controlbar;
+import info.android.runaway.controls.Sequence;
+
 import java.util.Random;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,8 +13,11 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class MainActivity extends Activity {
 
@@ -20,19 +25,43 @@ public class MainActivity extends Activity {
 	public static final boolean NOBOMB = false;
 	public static final boolean RIGHT = true;
 	public static final boolean DOWN = false;
-
+	
+	private int[] levelInfo;
+	private boolean levelMap[];
+	
+	private Sequence sequencebar;
+	private Controlbar controlbar;
+	
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        int level = 4; // TODO: change to some getter
+        levelInfo = levelCalculatorA(level); // optional: create a Class for Level. Would make the code more understandable
+    	levelMap = levelGenerator(levelInfo);
+    	
+        this.sequencebar = new Sequence(
+    		levelInfo[1], 
+    		levelInfo[2],
+    		this,
+    		(LinearLayout)findViewById(R.id.seqeunce_container)
+		);
+    	this.controlbar = new Controlbar(
+			this.sequencebar,
+			(Button) findViewById(R.id.c_down),
+			(Button) findViewById(R.id.c_right),
+			(Button) findViewById(R.id.c_delete),
+			(Button) findViewById(R.id.c_start)
+    	); 
     }
     
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
-    	int level = 3;
+    	
     	ImageView imgview = (ImageView)findViewById(R.id.imageView1);
-    	int[] levelInfo = levelCalculatorA(level);
-    	boolean[] levelMap = levelGenerator(levelInfo);
+    	
     	Bitmap gamefield = drawMatrix(imgview.getWidth(), imgview.getHeight(), levelMap, levelInfo[0]);
     	imgview.setImageBitmap(gamefield);
     	boolean[] sequenz = {true,false};
