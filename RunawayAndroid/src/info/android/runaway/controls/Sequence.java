@@ -1,16 +1,23 @@
 package info.android.runaway.controls;
 
-import info.android.runaway.MainActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import com.bytehawks.engine.BytehawksObject;
+
+import info.android.runaway.GameActivity;
+import info.android.runaway.R;
 import android.app.Activity;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-public class Sequence implements Serializable {
+public class Sequence extends BytehawksObject implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 449891242255814728L;
 	private int minLength;
 	private int maxLength;
 	private Activity context;
@@ -28,21 +35,26 @@ public class Sequence implements Serializable {
 	public void add(boolean direction) {
 		System.out.println(direction);
 		if(currentSequence.size() < maxLength) {
-			Button btn = new Button(context);
-			btn.setText((MainActivity.DOWN == direction) ? "v" : ">");
-		    
+					    
+			ImageView image = new ImageView(context);
+			image.setImageResource(
+					GameActivity.DOWN == direction ? R.drawable.c_down: R.drawable.c_right
+			);
+			
 			currentSequence.add(direction);
-			container.addView(btn); 
+			container.addView(image); 
 		}
 	}
 	
 	public void removeLast() {
 		int i = currentSequence.size()-1;
-		container.removeViews(i, 1);
-		currentSequence.remove(i);
+		if(i >= 0) {
+			container.removeViews(i, 1);
+			currentSequence.remove(i);
+		}
 	}
 	
-	
-	
-
+	public ArrayList<Boolean> getCurrentSequence() {
+		return this.currentSequence;
+	}
 }

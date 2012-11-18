@@ -1,11 +1,14 @@
 package info.android.runaway.controls;
 
-import info.android.runaway.MainActivity;
-import info.android.runaway.R;
+
+import com.bytehawks.engine.BytehawksObject;
+
+import info.android.runaway.GameActivity;
 import android.view.View;
 import android.widget.Button;
 
-public class Controlbar {
+public class Controlbar extends BytehawksObject{
+	
 	
 	private Sequence sequence;
 	
@@ -14,13 +17,13 @@ public class Controlbar {
 		
 		down.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                updateSequence(MainActivity.DOWN);
+                updateSequence(GameActivity.DOWN);
             }
         });
 		
 		right.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                updateSequence(MainActivity.RIGHT);
+                updateSequence(GameActivity.RIGHT);
             }
         });
 		
@@ -30,7 +33,19 @@ public class Controlbar {
             }
         });
 		
+		start.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startSequence();
+			}
+		});
 		
+		
+	}
+
+	protected void startSequence() {
+		//new Anim().start(this.sequence.getCurrentSequence());
 	}
 
 	protected void updateSequence() {
