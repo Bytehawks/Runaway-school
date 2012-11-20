@@ -25,33 +25,36 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true" >
 
-        <Button
+        <ImageButton
             android:id="@+id/c_down"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:text="v" />
+            android:contentDescription="@string/down"
+            android:src="@drawable/c_down" />
 
-        <Button
+        <ImageButton
             android:id="@+id/c_right"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:text=">" />
+            android:contentDescription="@string/right"
+            android:src="@drawable/c_right" />
 
         <Button
             android:id="@+id/c_delete"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:text="D" />
+            android:text="@string/c_delete" />
 
         <Button
             android:id="@+id/c_start"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:text="S" />
+            android:text="@string/c_start" />
+
     </LinearLayout>
 
 </RelativeLayout>

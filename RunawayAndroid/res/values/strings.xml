@@ -7,5 +7,9 @@
     <string name="menu_close">Close Game</string>
     <string name="menu_about">About</string>
     <string name="menu_title">Runaway Android</string>
+    <string name="c_start">Start</string>
+    <string name="c_delete">Delete</string>
+    <string name="right">Right</string>
+    <string name="down">Down</string>
 
 </resources>

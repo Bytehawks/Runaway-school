@@ -26,17 +26,16 @@ public class Sequence extends BytehawksObject implements Serializable {
 	private ArrayList<Boolean> currentSequence = new ArrayList<Boolean>();
 	
 	public Sequence(int minLength, int maxLength, Activity context, LinearLayout container) {
-	    this.minLength = minLength;
+	    this.setMinLength(minLength);
 	    this.maxLength = maxLength;
-	    this.context = context;
+	    this.setContext(context);
 	    this.container = container;
 	}
 	
-	public void add(boolean direction) {
-		System.out.println(direction);
-		if(currentSequence.size() < maxLength) {
+	public void add(boolean direction){
+		if(currentSequence.size() < this.maxLength) {
 					    
-			ImageView image = new ImageView(context);
+			ImageView image = new ImageView(getContext());
 			image.setImageResource(
 					GameActivity.DOWN == direction ? R.drawable.c_down: R.drawable.c_right
 			);
@@ -56,5 +55,24 @@ public class Sequence extends BytehawksObject implements Serializable {
 	
 	public ArrayList<Boolean> getCurrentSequence() {
 		return this.currentSequence;
+	}
+
+	public int getMinLength() {
+		return minLength;
+	}
+	public int getMaxLength() {
+		return maxLength;
+	}
+
+	public void setMinLength(int minLength) {
+		this.minLength = minLength;
+	}
+
+	public Activity getContext() {
+		return context;
+	}
+
+	public void setContext(Activity context) {
+		this.context = context;
 	}
 }

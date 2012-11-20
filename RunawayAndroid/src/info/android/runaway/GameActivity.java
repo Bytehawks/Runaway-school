@@ -14,8 +14,6 @@ import android.widget.FrameLayout;
 
 public class GameActivity extends BytehawksActivity {
 
-	public static final boolean BOMB = true;
-	public static final boolean NOBOMB = false;
 	public static final boolean RIGHT = true;
 	public static final boolean DOWN = false;
 	

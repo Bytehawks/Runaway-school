@@ -83,7 +83,12 @@ public class BytehawksVector
 		mX *= scalar;
 		mY *= scalar;
 	}
-
+	public void div(float scalar)
+	{
+		mX /= scalar;
+		mY /= scalar;
+	}
+	
 	public float dot(BytehawksVector vector)
 	{
 		return (mX * vector.mX) + (mY * vector.mY);

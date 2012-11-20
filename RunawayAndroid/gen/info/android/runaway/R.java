@@ -271,11 +271,15 @@ containing a value of this type.
     }
     public static final class string {
         public static final int app_name=0x7f060000;
+        public static final int c_delete=0x7f060008;
+        public static final int c_start=0x7f060007;
+        public static final int down=0x7f06000a;
         public static final int menu_about=0x7f060005;
         public static final int menu_close=0x7f060004;
         public static final int menu_settings=0x7f060001;
         public static final int menu_startgame=0x7f060003;
         public static final int menu_title=0x7f060006;
+        public static final int right=0x7f060009;
         public static final int title_activity_main=0x7f060002;
     }
     public static final class style {

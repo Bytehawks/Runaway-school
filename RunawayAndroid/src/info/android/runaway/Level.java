@@ -14,12 +14,14 @@ public class Level extends BytehawksTileMap {
 	private int maxAllowedMoves = 1;
 	private int minAllowedMoves = 1;
 	private static int[] maxhelper = {1,1,2,2,2,2,3,3,3,3,4,4,5,5,5,5,5,5,7,7,7,7,7,7};
+	private BytehawksTileBank tileBank;
 	
 	public Level(BytehawksTileBank tileBank, int width, int height,
 			int difficulty) {
 		super(tileBank, width, height, (int)((difficulty/2)+4+.5f), (int)((difficulty/2)+4+.5f), false,
 				false);
 		this.difficulty = difficulty;
+		this.setTileBank(tileBank);
 	}
 
 
@@ -34,8 +36,8 @@ public class Level extends BytehawksTileMap {
 		}
 
 		public void setDifficulty(int difficulty) {
-			this.minAllowedMoves = (difficulty/ 6 + 2);
-			this.maxAllowedMoves = (difficulty/ 24 * 7 + maxhelper[difficulty%24]+1);
+			this.minAllowedMoves = (difficulty/ 6 + 3);
+			this.maxAllowedMoves = (difficulty/ 24 * 7 + maxhelper[difficulty%24]+2);
 			this.difficulty = difficulty;
 		}
 
@@ -47,10 +49,9 @@ public class Level extends BytehawksTileMap {
 			for (int t=0;t<this.mColumnsCount*this.mRowsCount;t++)
 				this.mMap[t]=(int) (Math.random()*bank.mTilesCount);
 			// Put the bottom of the camera at the lowest part of the map
-			
 			this.mScale = (float) this.mWidth/newWidth;
 			// Schritte berechnen
-	    	boolean[] steps = new boolean[(int)(Math.random()*(minAllowedMoves-maxAllowedMoves))+1+difficulty/ 6 + 2];
+	    	boolean[] steps = new boolean[(int)(Math.random()*(minAllowedMoves-maxAllowedMoves))+1+difficulty/ 6 + 3];
 	    	for(int i = 0; i < steps.length; i++){
 	    		steps[i] = rand.nextBoolean() ? RIGHT : DOWN;
 	    	}
@@ -66,6 +67,16 @@ public class Level extends BytehawksTileMap {
 	    			y++;
 	    		pos++;
 	    	}
+		}
+
+
+		public BytehawksTileBank getTileBank() {
+			return tileBank;
+		}
+
+
+		public void setTileBank(BytehawksTileBank tileBank) {
+			this.tileBank = tileBank;
 		}
 	
 }

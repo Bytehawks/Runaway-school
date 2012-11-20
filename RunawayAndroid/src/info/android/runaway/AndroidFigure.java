@@ -1,32 +1,75 @@
 package info.android.runaway;
 
 
+
 import com.bytehawks.engine.BytehawksSprite;
 import com.bytehawks.engine.BytehawksSpriteLayout;
 import com.bytehawks.engine.BytehawksVector;
 
 
-class AndroidFigure extends BytehawksSprite{
-	BytehawksVector mDestination;
-	float Speed; 
-	public AndroidFigure(BytehawksSpriteLayout sprite)
-	{
+public class AndroidFigure extends BytehawksSprite{
+	private BytehawksVector mDestination;
+	private float Speed; 
+	private Level level;
+	public AndroidFigure(BytehawksSpriteLayout sprite, Level levelObject){
 		super(sprite);
-		mPosition.set(16,16);
-		mDestination=new BytehawksVector(mPosition); 
+		this.setLevel(levelObject);
+		mPosition.set(levelObject.mScale*16,levelObject.mScale*16);
+		mDestination=new BytehawksVector(mPosition);
+		this.setScale(new BytehawksVector(levelObject.mScale, levelObject.mScale));
 		Speed=200;
 	}
 	@Override
-	public void step(float secondsElapsed)
-	{
-		if ((int)mPosition.mX<(int)mDestination.mX)
+	public void step(float secondsElapsed){
+		
+		if (mPosition.mX<mDestination.mX)
 			mPosition.mX+=Speed*secondsElapsed;
-		if ((int)mPosition.mX>(int)mDestination.mX)
+		if (mPosition.mX>mDestination.mX)
 			mPosition.mX-=Speed*secondsElapsed;
-		if ((int)mPosition.mY<(int)mDestination.mY)
+		if (mPosition.mY<mDestination.mY)
 			mPosition.mY+=Speed*secondsElapsed;
-		if ((int)mPosition.mY>(int)mDestination.mY)
+		if (mPosition.mY>mDestination.mY)
 			mPosition.mY-=Speed*secondsElapsed;
 		super.step(secondsElapsed);
+	}
+	
+	public void setScale(BytehawksVector vector){
+		vector.div(2);
+		this.mScale.set(vector);
+	}
+	
+	public void moveToDestination(BytehawksVector vector){
+		vector.add(this.mPosition);
+		this.mDestination = vector;
+	}
+	
+	public boolean hasCollided() {
+		int oneRowTiles = (int) Math.sqrt(getLevel().mColumnsCount*getLevel().mRowsCount);
+		int x = (int)this.mPosition.mX/80;
+		int y = (int)this.mPosition.mY/80;
+		if(getLevel().mMap[((x)+(y*oneRowTiles))] == 3 || getLevel().mMap[((x)+(y*oneRowTiles))] == 4){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	public boolean isOutside() {
+		int oneRowTiles = (int) Math.sqrt(getLevel().mColumnsCount*getLevel().mRowsCount);
+		int x = (int)this.mPosition.mX/60;
+		int y = (int)this.mPosition.mY/60;
+		
+		if(oneRowTiles <=  x || oneRowTiles <= y){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	public Level getLevel() {
+		return level;
+	}
+	public void setLevel(Level level) {
+		this.level = level;
 	}
 }
