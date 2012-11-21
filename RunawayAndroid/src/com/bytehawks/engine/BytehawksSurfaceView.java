@@ -120,43 +120,43 @@ public class BytehawksSurfaceView extends SurfaceView implements SurfaceHolder.C
 
 	public void start()
 	{
-		mGLThread = new RenderThread(this);
-		mGLThread.start();
+		setmGLThread(new RenderThread(this));
+		getmGLThread().start();
 	}
 
 	public void surfaceCreated(SurfaceHolder holder)
 	{
       Log.d("VIEW","surfaceCreated HOLDER");
-		mGLThread.surfaceCreated();
+		getmGLThread().surfaceCreated();
 	}
 
 	public void surfaceDestroyed(SurfaceHolder holder)
 	{
       Log.d("VIEW","surfaceDestroyed HOLDER");
-		mGLThread.surfaceDestroyed();
+		getmGLThread().surfaceDestroyed();
 	}
 
 	public void surfaceChanged(SurfaceHolder holder, int format, int w, int h)
 	{
       Log.d("VIEW","surfaceChanged HOLDER");
-		mGLThread.onWindowResize(w, h);
+		getmGLThread().onWindowResize(w, h);
 	}
 
 	public void onPause()
 	{
-		mGLThread.onPause();
+		getmGLThread().onPause();
 	}
 
 	public void onResume()
 	{
-		mGLThread.onResume();
+		getmGLThread().onResume();
 	}
 
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus)
 	{
 		super.onWindowFocusChanged(hasFocus);
-		mGLThread.onWindowFocusChanged(hasFocus);
+		getmGLThread().onWindowFocusChanged(hasFocus);
 	   Log.d("VIEW","onWindowFocusChanged");
 	}
 
@@ -166,7 +166,7 @@ public class BytehawksSurfaceView extends SurfaceView implements SurfaceHolder.C
 		super.onDetachedFromWindow();
 		roWidth=0;
 		roHeight=0;
-		mGLThread.requestExitAndWait();
+		getmGLThread().requestExitAndWait();
 	   Log.d("VIEW","onDetachedFromWindow");
 	}
 	
@@ -352,7 +352,7 @@ public class BytehawksSurfaceView extends SurfaceView implements SurfaceHolder.C
 	public void delete()
 	{
 		for (int t=0;t<mChildsCount;t++)
-			mChilds[t].delete();
+			mChilds[t].delete();		
 	}
 
 	/**
@@ -388,6 +388,14 @@ public class BytehawksSurfaceView extends SurfaceView implements SurfaceHolder.C
 	//---------------------------------------------
 	//-- ####################################### --
 	//---------------------------------------------
+
+	public RenderThread getmGLThread() {
+		return mGLThread;
+	}
+
+	public void setmGLThread(RenderThread mGLThread) {
+		this.mGLThread = mGLThread;
+	}
 
 
 }

@@ -30,7 +30,7 @@ public class MainActivity extends Activity  implements OnClickListener{
 				startActivity(intent);
 				break;
 			case R.id.menu_about:
-				intent = new Intent(this, GameActivity.class);
+				intent = new Intent(this, AboutActivity.class);
 				startActivity(intent);
 				break;
 			case R.id.menu_close:

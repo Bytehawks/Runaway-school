@@ -11,5 +11,8 @@
     <string name="c_delete">Delete</string>
     <string name="right">Right</string>
     <string name="down">Down</string>
-
+    <string name="about_title">About Runaway Android</string>
+    <string name="about_back">Back to menu</string>
+    <string name="about_text">Dieses Programm ist im Rahmen eines Schulprojekts enstanden.\n\nDie vorliegende Applikation steht\nunter der GPL v3.\n\nEine deutsche Übersetzung des englischsprachigen Lizenztextes ist unter:\nhttp://www.gnu.de/documents/gpl.de.html\nzu finden. Die originale Ausgabe der Lizenz ist veröffentlicht unter\nhttp://www.gnu.org/licenses/gpl.html\n\nDie Autoren sind Felix Nehrke, Tobias Schult und Wojciech Rydzewski.\n\nDer Quelltext liegt auf Github:\nhttp://github.com/nemoinho/Runaway-School</string>
+    
 </resources>

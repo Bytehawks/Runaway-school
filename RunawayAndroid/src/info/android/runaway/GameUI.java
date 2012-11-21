@@ -14,6 +14,7 @@ import com.bytehawks.engine.BytehawksObject;
 import com.bytehawks.engine.BytehawksSpriteLayout;
 import com.bytehawks.engine.BytehawksTileBank;
 import com.bytehawks.engine.BytehawksUI;
+import com.bytehawks.engine.BytehawksVector;
 
 public class GameUI extends BytehawksUI {
 	
@@ -30,18 +31,20 @@ public class GameUI extends BytehawksUI {
 	private Sequence sequencebar;
 	private  BytehawksSpriteLayout figureLayout;
 	private  AndroidFigure figure;
+	private BytehawksActivity activity;
 	
 	
     
     public GameUI(BytehawksActivity activity) {
 		super(activity);
+		this.activity = activity;
         DisplayMetrics displaymetrics = new DisplayMetrics();
     	activity.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
     	this.height = displaymetrics.heightPixels-150;
     	this.width = displaymetrics.widthPixels;
         field=addObject(new BytehawksObject());
         levelGround = new BytehawksTileBank(activity.mGLSurfaceView,R.drawable.tilemap,5,5,32,32);
-        levelObject = new Level(levelGround, this.width, this.height,this.difficulty );
+        levelObject = new Level(levelGround, this.width, this.height,this.difficulty);
         levelObject.createLevel(levelGround);       
         field.addObject(levelObject);
         figureLayout = new BytehawksSpriteLayout(activity.mGLSurfaceView,64, 64, R.drawable.android);
@@ -60,9 +63,43 @@ public class GameUI extends BytehawksUI {
     			(ImageButton) activity.findViewById(R.id.c_right),
     			(Button) activity.findViewById(R.id.c_delete),
     			(Button) activity.findViewById(R.id.c_start),
-    			figure
-        	); 
+    			figure,
+    			this
+        );         
+        
     }
+    
+    public void incDifficulty(){	
+    	DisplayMetrics displaymetrics = new DisplayMetrics();
+		this.difficulty++; 	
+		field.removeAll();
+	    	activity.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+	    	this.height = displaymetrics.heightPixels-150;
+	    	this.width = displaymetrics.widthPixels;
+	    	levelObject = new Level(levelGround, this.width, this.height,this.difficulty);
+	        levelObject.createLevel(levelGround);       
+	        field.addObject(levelObject);
+	        figure.setScale(new BytehawksVector(levelObject.mScale, levelObject.mScale));
+	        figure.mPosition.set(figure.mScale.mX*32,figure.mScale.mX*32);
+       	 	figure.moveToDestination(new BytehawksVector(0,0));
+	        figureLayout = new BytehawksSpriteLayout(activity.mGLSurfaceView,64, 64, R.drawable.android);
+			figure = new AndroidFigure(figureLayout,levelObject);	
+			field.addObject(figure);			
+			this.sequencebar.setMaxLength(levelObject.getMaxAllowedMoves());
+			this.sequencebar.setMinLength(levelObject.getMinAllowedMoves());	      
+	        this.controlbar = new Controlbar(
+	    			this.sequencebar,
+	    			(ImageButton) activity.findViewById(R.id.c_down),
+	    			(ImageButton) activity.findViewById(R.id.c_right),
+	    			(Button) activity.findViewById(R.id.c_delete),
+	    			(Button) activity.findViewById(R.id.c_start),
+	    			figure,
+	    			this
+	        );   
+	        
+	       
+	        this.sequencebar.clearSequence();
+	}
     
 
 }

@@ -115,7 +115,7 @@ public class RenderThread extends Thread
 			{
 				gl = (GL10) mEglHelper.createSurface(mView.getHolder());
 				isSizeChanged = true;
-				sleep(100); //Esa pedazo de chapuza para esperar a las EGL
+				sleep(100);
 			}
 			
 			if (isSurfaceCreated)
@@ -142,7 +142,6 @@ public class RenderThread extends Thread
 			}
 		}
 
-		//Esto ya parece Windows (Inicio, apagar sistema XD)
 		if (restartEgl)
 		{
 			mEglHelper.start(configSpec);

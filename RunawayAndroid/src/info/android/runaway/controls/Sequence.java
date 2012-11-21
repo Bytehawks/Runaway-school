@@ -52,6 +52,10 @@ public class Sequence extends BytehawksObject implements Serializable {
 			currentSequence.remove(i);
 		}
 	}
+	public void clearSequence(){
+			container.removeViews(0, currentSequence.size());
+			currentSequence.clear();
+	}
 	
 	public ArrayList<Boolean> getCurrentSequence() {
 		return this.currentSequence;
@@ -64,6 +68,9 @@ public class Sequence extends BytehawksObject implements Serializable {
 		return maxLength;
 	}
 
+	public void setMaxLength(int maxLength) {
+		this.maxLength = maxLength;
+	}
 	public void setMinLength(int minLength) {
 		this.minLength = minLength;
 	}

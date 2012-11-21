@@ -1,8 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent"
-    android:contentDescription="@string/title_activity_main" >
+    android:layout_height="match_parent" >
 
     <ImageView
         android:id="@+id/title_logo"
@@ -24,30 +23,27 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="@string/menu_title"
+            android:text="@string/about_title"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/android_color"
             android:typeface="normal" />
 
-        <Button
-            android:id="@+id/menu_startgame"
+        <TextView
+            android:id="@+id/textView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:text="@string/menu_startgame"
-            android:visibility="visible" />
+            android:layout_margin="5dp"
+            android:autoLink="web"
+            android:background="#77dddddd"
+            android:padding="8dp"
+            android:text="@string/about_text" />
 
         <Button
-            android:id="@+id/menu_about"
+            android:id="@+id/about_back"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/menu_about" />
-
-        <Button
-            android:id="@+id/menu_close"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/menu_close" />
+            android:layout_marginTop="10dp"
+            android:text="@string/about_back" />
 
     </LinearLayout>
 

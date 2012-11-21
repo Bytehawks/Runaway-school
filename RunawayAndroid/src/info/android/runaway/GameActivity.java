@@ -8,6 +8,7 @@ import com.bytehawks.engine.FPSCounter;
 import android.os.Bundle;
 
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
@@ -32,4 +33,14 @@ public class GameActivity extends BytehawksActivity {
 		BytehawksUI mDemo = new GameUI(this);
 		setUI(mDemo);
 	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{		
+		if ((keyCode == KeyEvent.KEYCODE_BACK)){
+			mGLSurfaceView.getmGLThread().requestExitAndWait();			
+		}
+		return super.onKeyDown(keyCode, event);
+	}	
+	
 }

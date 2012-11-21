@@ -2,6 +2,8 @@ package info.android.runaway;
 
 import java.util.Random;
 
+import android.util.Log;
+
 import com.bytehawks.engine.BytehawksTileBank;
 import com.bytehawks.engine.BytehawksTileMap;
 
@@ -36,9 +38,10 @@ public class Level extends BytehawksTileMap {
 		}
 
 		public void setDifficulty(int difficulty) {
-			this.minAllowedMoves = (difficulty/ 6 + 3);
+			this.minAllowedMoves = (difficulty/ 6 + 2);
 			this.maxAllowedMoves = (difficulty/ 24 * 7 + maxhelper[difficulty%24]+2);
 			this.difficulty = difficulty;
+			Log.d("Difficulty", Integer.toString(difficulty));
 		}
 
 		public void createLevel(BytehawksTileBank bank) {
@@ -68,8 +71,7 @@ public class Level extends BytehawksTileMap {
 	    		pos++;
 	    	}
 		}
-
-
+		
 		public BytehawksTileBank getTileBank() {
 			return tileBank;
 		}

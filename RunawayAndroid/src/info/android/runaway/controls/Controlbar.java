@@ -8,7 +8,7 @@ import com.bytehawks.engine.BytehawksVector;
 
 import info.android.runaway.GameActivity;
 import info.android.runaway.AndroidFigure;
-import info.android.runaway.Level;
+import info.android.runaway.GameUI;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.View;
@@ -20,11 +20,13 @@ public class Controlbar extends BytehawksObject{
 	
 	private Sequence sequence;
 	private AndroidFigure figure;
+	private GameUI context;
 	private boolean running;
 	
-	public Controlbar(Sequence sequence, ImageButton down, ImageButton right, Button delete, Button start, AndroidFigure figure) {
+	public Controlbar(Sequence sequence, ImageButton down, ImageButton right, Button delete, Button start, AndroidFigure figure, GameUI context) {
 		this.sequence = sequence;
 		this.figure = figure;
+		this.context = context;
 		
 		down.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -139,9 +141,7 @@ public class Controlbar extends BytehawksObject{
 	         public void onClick(DialogInterface dialog, int whichButton){
 	        	 figure.mPosition.set(figure.mScale.mX*32,figure.mScale.mX*32);
 	        	 figure.moveToDestination(new BytehawksVector(0,0));
-	        	 Level level = figure.getLevel();
-	        	 level = new Level(level.getTileBank(), level.mWidth, level.mHeight,
-	        			 level.getDifficulty()+1);
+	        	 context.incDifficulty();
 	         }
 	         })
 	      .show();		

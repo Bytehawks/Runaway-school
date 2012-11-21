@@ -45,8 +45,8 @@ public class AndroidFigure extends BytehawksSprite{
 	
 	public boolean hasCollided() {
 		int oneRowTiles = (int) Math.sqrt(getLevel().mColumnsCount*getLevel().mRowsCount);
-		int x = (int)this.mPosition.mX/80;
-		int y = (int)this.mPosition.mY/80;
+		int x = (int) (this.mPosition.mX/(this.mScale.mX*64));
+		int y = (int) (this.mPosition.mY/(this.mScale.mY*64));
 		if(getLevel().mMap[((x)+(y*oneRowTiles))] == 3 || getLevel().mMap[((x)+(y*oneRowTiles))] == 4){
 			return true;
 		}
@@ -56,9 +56,8 @@ public class AndroidFigure extends BytehawksSprite{
 	}
 	public boolean isOutside() {
 		int oneRowTiles = (int) Math.sqrt(getLevel().mColumnsCount*getLevel().mRowsCount);
-		int x = (int)this.mPosition.mX/60;
-		int y = (int)this.mPosition.mY/60;
-		
+		int x = (int) (this.mPosition.mX/(this.mScale.mX*48));
+		int y = (int) (this.mPosition.mY/(this.mScale.mY*48));		
 		if(oneRowTiles <=  x || oneRowTiles <= y){
 			return true;
 		}

@@ -86,7 +86,7 @@ public class BytehawksActivity extends Activity
 	{
 		if (mCurrentUI != null)
 			if (mCurrentUI.onKeyDown(keyCode, event))
-				return true;
+				return true;	
 		return super.onKeyDown(keyCode, event);
 	}
 
@@ -109,9 +109,7 @@ public class BytehawksActivity extends Activity
 	}
 
 	@Override
-	public void finish()
-	{
-		mGLSurfaceView.delete();
+	public void finish(){		
 		super.finish();
 	}
 
@@ -153,5 +151,4 @@ public class BytehawksActivity extends Activity
 	{
 
 	}
-
 }
