@@ -8,22 +8,25 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/seqeunce_scroll"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_above="@+id/controlbar"
-        android:minHeight="20dp" >
+        android:minHeight="40dp" >
 
         <LinearLayout
             android:id="@+id/seqeunce_container"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:minHeight="40dp" >
+
         </LinearLayout>
     </HorizontalScrollView>
 
     <LinearLayout
         android:id="@+id/controlbar"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:minHeight="50dp" >
 
         <ImageButton
             android:id="@+id/c_down"

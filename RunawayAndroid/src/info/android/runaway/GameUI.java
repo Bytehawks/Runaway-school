@@ -21,6 +21,8 @@ public class GameUI extends BytehawksUI {
 	private Level levelObject;
 	private BytehawksTileBank levelGround;
 	
+
+	
 	private int height;
 	private int width;
 	
@@ -32,7 +34,7 @@ public class GameUI extends BytehawksUI {
 	private  BytehawksSpriteLayout figureLayout;
 	private  AndroidFigure figure;
 	private BytehawksActivity activity;
-	
+	public static final float dp = 155f;
 	
     
     public GameUI(BytehawksActivity activity) {
@@ -40,7 +42,7 @@ public class GameUI extends BytehawksUI {
 		this.activity = activity;
         DisplayMetrics displaymetrics = new DisplayMetrics();
     	activity.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-    	this.height = displaymetrics.heightPixels-150;
+    	this.height = (int) (displaymetrics.heightPixels-(displaymetrics.density * dp + 0.5f));
     	this.width = displaymetrics.widthPixels;
         field=addObject(new BytehawksObject());
         levelGround = new BytehawksTileBank(activity.mGLSurfaceView,R.drawable.tilemap,5,5,32,32);
@@ -66,7 +68,7 @@ public class GameUI extends BytehawksUI {
     			figure,
     			this
         );         
-        
+        activity.setTitle("Level:"+levelObject.getDifficulty()+" Max moves:"+ levelObject.getMaxAllowedMoves());
     }
     
     public void incDifficulty(){	
@@ -74,7 +76,7 @@ public class GameUI extends BytehawksUI {
 		this.difficulty++; 	
 		field.removeAll();
 	    	activity.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-	    	this.height = displaymetrics.heightPixels-150;
+	    	this.height = (int) (displaymetrics.heightPixels-(displaymetrics.density * dp + 0.5f));
 	    	this.width = displaymetrics.widthPixels;
 	    	levelObject = new Level(levelGround, this.width, this.height,this.difficulty);
 	        levelObject.createLevel(levelGround);       
@@ -95,10 +97,9 @@ public class GameUI extends BytehawksUI {
 	    			(Button) activity.findViewById(R.id.c_start),
 	    			figure,
 	    			this
-	        );   
-	        
-	       
+	        );       
 	        this.sequencebar.clearSequence();
+	        activity.setTitle("Level:"+levelObject.getDifficulty()+" Max moves:"+ levelObject.getMaxAllowedMoves());
 	}
     
 

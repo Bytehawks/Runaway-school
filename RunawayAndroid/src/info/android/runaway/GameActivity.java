@@ -17,6 +17,7 @@ public class GameActivity extends BytehawksActivity {
 
 	public static final boolean RIGHT = true;
 	public static final boolean DOWN = false;
+	public static final float dp = 155f;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -28,7 +29,8 @@ public class GameActivity extends BytehawksActivity {
 		FrameLayout mMainLayout=new FrameLayout(this);
 		mMainLayout.addView(mGLSurfaceView);
 		setContentView(R.layout.activity_game);
-		addContentView(mMainLayout,  new ViewGroup.LayoutParams(-1, displaymetrics.heightPixels-150));
+		int height = (int) (displaymetrics.heightPixels-(displaymetrics.density * dp + 0.5f));
+		addContentView(mMainLayout,  new ViewGroup.LayoutParams(-1, height));
 		
 		BytehawksUI mDemo = new GameUI(this);
 		setUI(mDemo);
