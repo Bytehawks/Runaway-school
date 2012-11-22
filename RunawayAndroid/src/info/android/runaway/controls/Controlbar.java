@@ -76,32 +76,40 @@ public class Controlbar extends BytehawksObject{
 			this.running = true;
 			figure.mPosition.set(figure.mScale.mX*32,figure.mScale.mX*32);		
 			int i = 0;
+			int desX = 0;
+			int desY = 0;
 			while(this.running == true){
 				if(currentsequence.size() == i){
 					i = 0;
 				}
-				if(currentsequence.get(i) == true){
-					this.figure.moveToDestination(new BytehawksVector(figure.mScale.mX*64,0));
+				if(figure.mPosition.mX < desX && figure.mPosition.mY < desY && desX != 0 && desY != 0){
+					if(figure.hasCollided() == true){
+						this.explode();	
+						this.running = false;
+						break;
+					}
+					if(figure.isOutside() == true){
+						this.win();	
+						this.running = false;
+						break;
+					}
+					i++;
 				}
 				else{
-					this.figure.moveToDestination(new BytehawksVector(0,figure.mScale.mY*64));
+					if(currentsequence.get(i) == true){
+						desX = (int)(figure.mScale.mX*64+figure.mPosition.mX)-2;
+						this.figure.moveToDestination(new BytehawksVector(figure.mScale.mX*64,0));
+					}
+					else{
+						desY = (int)(figure.mScale.mY*64+figure.mPosition.mY)-2;
+						this.figure.moveToDestination(new BytehawksVector(0,figure.mScale.mY*64));
+					}
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}	
 				}
-				if(figure.hasCollided() == true){
-					this.explode();	
-					this.running = false;
-					break;
-				}
-				if(figure.isOutside() == true){
-					this.win();	
-					this.running = false;
-					break;
-				}
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}						
-				i++;
 			}			
 		}
 		
